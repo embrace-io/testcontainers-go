@@ -305,8 +305,8 @@ func NewDockerProvider() (*DockerProvider, error) {
 
 // BuildImage will build and image from context and Dockerfile, then return the tag
 func (p *DockerProvider) BuildImage(ctx context.Context, img ImageBuildInfo) (string, error) {
-	repo := uuid.NewV4()
-	tag := uuid.NewV4()
+	repo := uuid.Must(uuid.NewV4())
+	tag := uuid.Must(uuid.NewV4())
 
 	repoTag := fmt.Sprintf("%s:%s", repo, tag)
 
@@ -355,7 +355,7 @@ func (p *DockerProvider) CreateContainer(ctx context.Context, req ContainerReque
 		req.Labels = make(map[string]string)
 	}
 
-	sessionID := uuid.NewV4()
+	sessionID := uuid.Must(uuid.NewV4())
 
 	var termSignal chan bool
 	if !req.SkipReaper {
@@ -552,7 +552,7 @@ func (p *DockerProvider) CreateNetwork(ctx context.Context, req NetworkRequest) 
 		Labels:         req.Labels,
 	}
 
-	sessionID := uuid.NewV4()
+	sessionID := uuid.Must(uuid.NewV4())
 
 	var termSignal chan bool
 	if !req.SkipReaper {
